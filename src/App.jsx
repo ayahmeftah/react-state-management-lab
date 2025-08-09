@@ -91,6 +91,9 @@ const App = () => {
     ]
   )
 
+  const totalStrength = team.reduce((sum, fighter) => sum + fighter.strength, 0)
+  const totalAgility = team.reduce((sum, fighter) => sum + fighter.agility, 0)
+
   function handleAddFighter(fighter) {
     if (money >= fighter.price) {
       const createdTeam = [...team, fighter]
@@ -110,8 +113,8 @@ const App = () => {
     <>
       <h1>Zombie Fighters</h1>
       <h3>Money: {money}</h3>
-      <h3>Team Strength: 0</h3>
-      <h3>Team Agility: 0</h3>
+      <h3>Team Strength: {totalStrength}</h3>
+      <h3>Team Agility: {totalAgility}</h3>
       <h3>Team</h3>
       {team.length === 0 ? (<p>Pick some team members!</p>) : (
         <ul>
