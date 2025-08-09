@@ -109,6 +109,14 @@ const App = () => {
 
   }
 
+  function handleRemoveFighter(fighter){
+    const newTeam = team.filter(allFighters => allFighters.id !== fighter.id)
+    setTeam(newTeam)
+    const allFighters = [...zombieFighters, fighter]
+    setZombieFighters(allFighters)
+    setMoney(money + fighter.price)
+  }
+
   return (
     <>
       <h1>Zombie Fighters</h1>
@@ -126,6 +134,7 @@ const App = () => {
                 <p>Price: {fighter.price}</p>
                 <p>Strength: {fighter.strength}</p>
                 <p>Agility: {fighter.agility}</p>
+                <button onClick={() => handleRemoveFighter(fighter)}>Remove</button>
               </li>
             )
           })}
