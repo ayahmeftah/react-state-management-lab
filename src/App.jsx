@@ -91,19 +91,19 @@ const App = () => {
     ]
   )
 
-  function handleAddFighter(fighter){
-    if( money >= fighter.price){
+  function handleAddFighter(fighter) {
+    if (money >= fighter.price) {
       const createdTeam = [...team, fighter]
-    setTeam(createdTeam)
+      setTeam(createdTeam)
 
-    const newFighters = zombieFighters.filter(allFighters => allFighters.id !== fighter.id)
-    setZombieFighters(newFighters)
+      const newFighters = zombieFighters.filter(allFighters => allFighters.id !== fighter.id)
+      setZombieFighters(newFighters)
 
-    setMoney(money - fighter.price)
-    }else{
-      console.log("Not enough money")
+      setMoney(money - fighter.price)
+    } else {
+      alert("Not enough money")
     }
-    
+
   }
 
   return (
@@ -113,19 +113,34 @@ const App = () => {
       <h3>Team Strength: 0</h3>
       <h3>Team Agility: 0</h3>
       <h3>Team</h3>
-      <p>Pick some team members</p>
-      <h2>Fighters</h2>
-      <ul>
-        {zombieFighters.map((fighter)=>{
-          return (
+      {team.length === 0 ? (<p>Pick some team members!</p>) : (
+        <ul>
+          {team.map((fighter) => {
+            return (
               <li key={fighter.id}>
-                <img src={fighter.img} />
+                <img src={fighter.img} alt={fighter.name} />
                 <p><strong>{fighter.name}</strong></p>
                 <p>Price: {fighter.price}</p>
                 <p>Strength: {fighter.strength}</p>
                 <p>Agility: {fighter.agility}</p>
-                <button onClick={() => handleAddFighter(fighter)}>Add</button>
               </li>
+            )
+          })}
+        </ul>
+      )}
+
+      <h2>Fighters</h2>
+      <ul>
+        {zombieFighters.map((fighter) => {
+          return (
+            <li key={fighter.id}>
+              <img src={fighter.img} />
+              <p><strong>{fighter.name}</strong></p>
+              <p>Price: {fighter.price}</p>
+              <p>Strength: {fighter.strength}</p>
+              <p>Agility: {fighter.agility}</p>
+              <button onClick={() => handleAddFighter(fighter)}>Add</button>
+            </li>
           )
         })}
       </ul>
