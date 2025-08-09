@@ -91,6 +91,21 @@ const App = () => {
     ]
   )
 
+  function handleAddFighter(fighter){
+    if( money >= fighter.price){
+      const createdTeam = [...team, fighter]
+    setTeam(createdTeam)
+
+    const newFighters = zombieFighters.filter(allFighters => allFighters.id !== fighter.id)
+    setZombieFighters(newFighters)
+
+    setMoney(money - fighter.price)
+    }else{
+      console.log("Not enough money")
+    }
+    
+  }
+
   return (
     <>
       <h1>Zombie Fighters</h1>
@@ -103,16 +118,14 @@ const App = () => {
       <ul>
         {zombieFighters.map((fighter)=>{
           return (
-            <>
-              <li>
+              <li key={fighter.id}>
                 <img src={fighter.img} />
                 <p><strong>{fighter.name}</strong></p>
                 <p>Price: {fighter.price}</p>
                 <p>Strength: {fighter.strength}</p>
                 <p>Agility: {fighter.agility}</p>
-                <button>Add</button>
+                <button onClick={() => handleAddFighter(fighter)}>Add</button>
               </li>
-            </>
           )
         })}
       </ul>
